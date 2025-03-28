@@ -46,3 +46,5 @@ JWT_SECRET=<your_jwt_secret>
 - jsonwebtoken: JWT 認證
 - bcrypt: 密碼加密
 - dotenv: 環境變數管理
+
+<!-- TODO: 測試 docker 相關檔案是否可以正常運行，並且添加 docker 相關的 README 以及可能需要添加安裝步驟是 npm install -g knex 的說明 -->
