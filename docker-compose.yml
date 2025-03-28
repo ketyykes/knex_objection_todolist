@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      # 將本地程式碼映射到容器，支援熱重載
+      - ./:/app
+      # 排除 node_modules，避免覆蓋容器內的依賴
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/todo_app
+      - JWT_SECRET=your_jwt_secret_change_this_in_production
+    depends_on:
+      - db
+    command: sh -c "pnpm run migrate && pnpm run dev"
+
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    volumes:
+      # 將資料庫資料持久化到本地目錄
+      - ./docker-data/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=todo_app
+
+volumes:
+  postgres_data: 
