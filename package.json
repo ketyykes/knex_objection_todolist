@@ -1,9 +1,13 @@
 {
 	"scripts": {
 		"start": "node app.js",
-		"dev": "nodemon app.js"
+		"dev": "nodemon app.js",
+		"migrate:latest": "knex migrate:latest",
+		"migrate:rollback": "knex migrate:rollback",
+		"migrate:status": "knex migrate:status"
 	},
 	"dependencies": {
+		"argon2": "^0.43.0",
 		"bcrypt": "^5.1.1",
 		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
