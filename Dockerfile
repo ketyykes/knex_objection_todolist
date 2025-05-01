@@ -4,8 +4,6 @@ FROM node:18-alpine
 # 設置工作目錄
 WORKDIR /app
 
-# 安裝 bcrypt 所需的系統依賴
-RUN apk add --no-cache python3 make g++ gcc
 
 # 安裝 pnpm
 RUN npm install -g pnpm
