@@ -17,14 +17,25 @@ app.use(express.json());
 app.use("/auth", authRoutes);
 app.use("/todos", todoRoutes);
 
-const PORT = process.env.PORT || 3000;
+app.get("/", (req, res) => {
+	res.send("Hello World");
+});
+
+// 健康檢查端點
+app.get("/health", (req, res) => {
+	res.status(200).json({ status: "healthy" });
+});
+
+const port = process.env.PORT || 3000;
 
 // 測試資料庫連接
 knex
 	.raw("SELECT 1")
 	.then(() => {
 		console.log("資料庫連接成功");
-		app.listen(PORT, () => console.log(`伺服器運行在端口 ${PORT}`));
+		app.listen(port, () => {
+			console.log(`伺服器運行在 http://localhost:${port}`);
+		});
 	})
 	.catch((err) => {
 		console.error("資料庫連接失敗：", err);
