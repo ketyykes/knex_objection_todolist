@@ -1,0 +1,36 @@
+# 使用 Node.js 18 作為基礎鏡像
+FROM node:18-alpine
+
+# 設置工作目錄
+WORKDIR /app
+
+# 安裝 bcrypt 所需的系統依賴
+RUN apk add --no-cache python3 make g++ gcc
+
+# 安裝 pnpm
+RUN npm install -g pnpm
+
+# 複製 package.json 和 pnpm-lock.yaml
+COPY package.json pnpm-lock.yaml ./
+
+# 安裝依賴
+RUN pnpm install --frozen-lockfile
+
+# 複製所有原始碼
+COPY . .
+
+# 設置環境變數
+ENV NODE_ENV=production
+ENV PORT=3000
+
+# 曝露端口
+EXPOSE 3000
+
+# 設定啟動腳本為可執行檔
+RUN chmod +x ./docker-entrypoint.sh
+
+# 設定入口點
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
+# 啟動應用
+CMD ["node", "app.js"] 
