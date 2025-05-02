@@ -1,0 +1,55 @@
+# 定義 Docker Compose 服務
+services:
+  # 應用服務容器
+  app:
+    build:
+      context: . # 構建上下文仍為當前目錄
+      dockerfile: Dockerfile.prod # 使用 Dockerfile.prod 作為構建文件
+    ports:
+      - "3000:3000" # 將主機的 3000 埠對應到容器的 3000 埠
+    env_file: .env # 從 .env 檔案載入環境變數
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped # 除非手動停止，否則容器總是重新啟動
+    networks:
+      - backend # 連接到後端網路
+    volumes:
+      - ./:/app # 掛載本地目錄到容器，方便開發
+      - /app/node_modules # 排除 node_modules
+    healthcheck: # 應用程式健康檢查
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # PostgreSQL 資料庫服務容器
+  db:
+    image: postgres:14-alpine # 使用 PostgreSQL 14 的 Alpine 映像檔
+    environment: # 設定環境變數
+      - POSTGRES_USER=${POSTGRES_USER} # 從 .env 取得的資料庫使用者名稱
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD} # 從 .env 取得的資料庫密碼
+      - POSTGRES_DB=${POSTGRES_DB} # 從 .env 取得的資料庫名稱
+      - TZ=Asia/Taipei # 設定時區為台北
+      - LANG=C.UTF-8 # 設定語言環境
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # 使用命名卷持久化資料庫資料
+    healthcheck: # 健康檢查設定
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"] # 檢查資料庫是否就緒
+      interval: 10s # 檢查間隔時間
+      timeout: 5s # 檢查超時時間
+      retries: 5 # 重試次數
+      start_period: 30s # 服務啟動後等待時間
+    restart: unless-stopped # 除非手動停止，否則容器總是重新啟動
+    networks:
+      - backend # 連接到後端網路
+
+# 定義持久化資料卷
+volumes:
+  postgres_data: # 用於存放 PostgreSQL 資料的命名卷
+
+# 定義網路
+networks:
+  backend: # 後端服務使用的私有網路
