@@ -7,5 +7,7 @@ router.use(authMiddleware);
 
 router.post("/", todoController.createTodo);
 router.get("/", todoController.getTodos);
+router.put("/:id", todoController.updateTodo);
+router.delete("/:id", todoController.deleteTodo);
 
 module.exports = router;
