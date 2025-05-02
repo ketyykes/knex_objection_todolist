@@ -4,7 +4,7 @@
 
 ## 技術特點
 
-- **認證系統**：使用 `bcrypt` 和 `argon2` 進行密碼加密，`jsonwebtoken` 處理用戶認證
+- **認證系統**： `argon2` 進行密碼加密，`jsonwebtoken` 處理用戶認證
 - **資料庫**：使用 PostgreSQL 作為資料庫系統
 - **ORM 及查詢構建器**：採用 `knex.js` 查詢構建器和 `objection.js` ORM 進行資料操作
 - **環境配置**：使用 `dotenv` 管理環境變數
@@ -13,7 +13,7 @@
 
 ## 環境要求
 
-- Node.js 18+
+- Node.js 20+
 - PostgreSQL 14+
 - 或者 Docker 和 Docker Compose（推薦）
 
@@ -72,8 +72,6 @@
 
 ```
 # 應用設定
-PORT=3000
-NODE_ENV=development
 JWT_SECRET=your_jwt_secret
 
 # 資料庫設定
