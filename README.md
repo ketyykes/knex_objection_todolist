@@ -27,7 +27,7 @@
    cd knex_objection_todolist
    ```
 
-2. 創建 `.env` 檔案（參考下方環境變數部分）
+2. 建立 `.env` 檔案（參考下方環境變數部分）
 
 3. 使用 Docker Compose 啟動：
    ```
@@ -49,7 +49,7 @@
    pnpm install
    ```
 
-3. 創建 `.env` 檔案（參考下方環境變數部分）
+3. 建立 `.env` 檔案（參考下方環境變數部分）
 
 4. 運行資料庫遷移：
    ```
@@ -60,7 +60,7 @@
    - 開發模式：`pnpm run dev`
    - 生產模式：`pnpm start`
 
-## 資料庫遷移命令
+## Database migration command
 
 - 執行最新遷移：`pnpm run migrate:latest`
 - 回滾遷移：`pnpm run migrate:rollback`
@@ -68,7 +68,7 @@
 
 ## 環境變數
 
-創建一個 `.env` 檔案，包含以下變數：
+建立一個 `.env` 檔案，包含以下變數：
 
 ```
 # 應用設定
@@ -96,14 +96,32 @@ POSTGRES_PORT=5432
 
 本專案包含完整的 Docker 設定，包括：
 
-- **Dockerfile**: 用於建構應用容器
-- **docker-compose.yml**: 用於協調應用和資料庫容器
+- **Dockerfile**: 用於建構開發環境應用容器
+- **Dockerfile.prod**: 用於建構生產環境應用容器
+- **docker-compose.yml**: 用於協調開發環境的應用和資料庫容器
+- **docker-compose.prod.yml**: 用於協調生產環境的應用和資料庫容器
 - **docker-entrypoint.sh**: 容器啟動腳本，處理資料庫遷移
 
 啟動容器後，應用將在 `http://localhost:3000` 可用，資料庫將自動建立並遷移。
 
-## API 端點
+## Model
 
-- `/auth`: 認證相關端點
-- `/todos`: 待辦事項管理端點
-- `/health`: 健康檢查端點
+專案包含兩個主要的 Model：
+
+- **User**: User Model，包含 id、username、password 欄位
+- **Todo**: Todo Model，包含 id、title、completed、user_id 欄位以及與 User 的關聯
+
+## API Route
+
+### Authentication route `/auth`
+- `POST /auth/register`: 註冊新用戶
+- `POST /auth/login`: 用戶登入
+
+### Todo Route `/todos` (需要認證)
+- `GET /todos`: 獲取當前用戶的所有待辦事項
+- `POST /todos`: 建立新的待辦事項
+- `PUT /todos/:id`: 更新指定的待辦事項
+- `DELETE /todos/:id`: 刪除指定的待辦事項
+
+### 系統端點
+- `GET /health`: 健康檢測 Route
