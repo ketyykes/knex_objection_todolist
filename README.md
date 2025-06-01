@@ -71,16 +71,29 @@
 建立一個 `.env` 檔案，包含以下變數：
 
 ```
-# 應用設定
-JWT_SECRET=your_jwt_secret
+# 資料庫連線字串範例
+DATABASE_URL=postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@db:5432/<POSTGRES_DB>
 
-# 資料庫設定
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=yourpassword
-POSTGRES_DB=tododb
-POSTGRES_HOST=db       # 若使用 Docker，使用 db；本機開發使用 localhost
-POSTGRES_PORT=5432
+# 資料庫連線資訊
+POSTGRES_USER=<your_postgres_user>
+POSTGRES_PASSWORD=<your_postgres_password>
+POSTGRES_DB=<your_postgres_db>
+
+# JWT 秘鑰範例
+JWT_SECRET=<your_jwt_secret>
+
+# 日誌等級（例如：debug、info、warn、error）
+LOG_LEVEL=<your_log_level>
 ```
+
+### 環境變數說明
+
+- `DATABASE_URL`: 完整的 PostgreSQL 資料庫連線字串
+- `POSTGRES_USER`: PostgreSQL 資料庫使用者名稱
+- `POSTGRES_PASSWORD`: PostgreSQL 資料庫密碼
+- `POSTGRES_DB`: PostgreSQL 資料庫名稱
+- `JWT_SECRET`: JWT 認證所使用的秘鑰，建議使用長且複雜的字串
+- `LOG_LEVEL`: 應用程式日誌等級，可設定為 debug、info、warn 或 error
 
 ## 主要依賴
 
