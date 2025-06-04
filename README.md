@@ -113,7 +113,6 @@ LOG_LEVEL=<your_log_level>
 - **Dockerfile.prod**: 用於建構生產環境應用容器
 - **docker-compose.yml**: 用於協調開發環境的應用和資料庫容器
 - **docker-compose.prod.yml**: 用於協調生產環境的應用和資料庫容器
-- **docker-entrypoint.sh**: 容器啟動腳本，處理資料庫遷移
 
 啟動容器後，應用將在 `http://localhost:3000` 可用，資料庫將自動建立並遷移。
 

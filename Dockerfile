@@ -4,7 +4,6 @@ FROM node:20
 # 設置工作目錄
 WORKDIR /app
 
-
 # 安裝 pnpm
 RUN npm install -g pnpm
 
@@ -24,11 +23,5 @@ ENV PORT=3000
 # 曝露端口
 EXPOSE 3000
 
-# 設定啟動腳本為可執行檔
-RUN chmod +x ./docker-entrypoint.sh
-
-# 設定入口點
-ENTRYPOINT ["./docker-entrypoint.sh"]
-
 # 啟動應用
-CMD ["npm", "run", "dev"]
+CMD pnpm run migrate:latest && pnpm run dev

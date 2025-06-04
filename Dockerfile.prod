@@ -24,11 +24,8 @@ ENV PORT=3000
 # 曝露端口
 EXPOSE 3000
 
-# 設定啟動腳本為可執行檔
-RUN chmod +x ./docker-entrypoint.sh
-
-# 設定入口點
-ENTRYPOINT ["./docker-entrypoint.sh"]
+# 曝露端口
+EXPOSE 3000
 
 # 啟動應用
-CMD ["node", "app.js"] 
+CMD pnpm run migrate:latest && pnpm run dev
