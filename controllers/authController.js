@@ -12,6 +12,11 @@ exports.register = async (req, res) => {
 		});
 		res.status(201).json({ message: "用戶註冊成功" });
 	} catch (error) {
+		if (error.code === "23505") {
+			return res.status(409).json({
+				message: "使用者名稱已存在，請選擇其他名稱",
+			});
+		}
 		res.status(500).json({ message: "註冊失敗", error: error.message });
 	}
 };
