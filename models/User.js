@@ -1,4 +1,5 @@
-const { Model } = require("objection");
+import { Model } from "objection";
+import Todo from "./Todo.js";
 
 class User extends Model {
 	static get tableName() {
@@ -6,7 +7,6 @@ class User extends Model {
 	}
 
 	static get relationMappings() {
-		const Todo = require("./Todo");
 		return {
 			todos: {
 				relation: Model.HasManyRelation,
@@ -20,4 +20,4 @@ class User extends Model {
 	}
 }
 
-module.exports = User;
+export default User;

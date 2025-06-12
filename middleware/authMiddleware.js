@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
 	const token = req.header("Authorization")?.replace("Bearer ", "");
 	if (!token) {
 		return res.status(401).json({ message: "未提供認證令牌" });

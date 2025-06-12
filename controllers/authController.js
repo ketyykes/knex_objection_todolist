@@ -1,8 +1,8 @@
-const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
 	try {
 		const { username, password } = req.body;
 		const hashedPassword = await argon2.hash(password);
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
 	}
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
 	try {
 		const { username, password } = req.body;
 		const user = await User.query().findOne({ username });
