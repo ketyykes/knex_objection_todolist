@@ -6,6 +6,7 @@ import knexConfig from "./knexfile.js";
 
 import authRoutes from "./routes/authRoutes.js";
 import todoRoutes from "./routes/todoRoutes.js";
+import { createApolloServer, getGraphQLMiddleware } from "./graphql/server.js";
 
 const app = express();
 const knex = Knex(knexConfig);
@@ -28,16 +29,28 @@ app.get("/health", (req, res) => {
 
 const port = process.env.PORT || 3000;
 
-// 測試資料庫連接
-knex
-	.raw("SELECT 1")
-	.then(() => {
+// 初始化並啟動伺服器
+const startServer = async () => {
+	try {
+		// 測試資料庫連接
+		await knex.raw("SELECT 1");
 		console.log("資料庫連接成功");
+
+		// 建立 Apollo GraphQL 伺服器
+		const apolloServer = await createApolloServer();
+
+		// 設定 GraphQL 端點
+		app.use("/graphql", getGraphQLMiddleware(apolloServer));
+
+		// 啟動 Express 伺服器
 		app.listen(port, () => {
 			console.log(`伺服器運行在 http://localhost:${port}`);
+			console.log(`GraphQL Playground: http://localhost:${port}/graphql`);
 		});
-	})
-	.catch((err) => {
-		console.error("資料庫連接失敗：", err);
+	} catch (err) {
+		console.error("伺服器啟動失敗：", err);
 		process.exit(1);
-	});
+	}
+};
+
+startServer();
