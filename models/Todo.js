@@ -1,4 +1,5 @@
-const { Model } = require("objection");
+import { Model } from "objection";
+import User from "./User.js";
 
 class Todo extends Model {
 	static get tableName() {
@@ -6,7 +7,6 @@ class Todo extends Model {
 	}
 
 	static get relationMappings() {
-		const User = require("./User");
 		return {
 			user: {
 				relation: Model.BelongsToOneRelation,
@@ -20,4 +20,4 @@ class Todo extends Model {
 	}
 }
 
-module.exports = Todo;
+export default Todo;

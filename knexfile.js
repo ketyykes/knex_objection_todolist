@@ -1,6 +1,6 @@
-require("dotenv").config();
+import "dotenv/config";
 
-module.exports = {
+export default {
 	client: "pg",
 	connection: process.env.DATABASE_URL,
 	migrations: {

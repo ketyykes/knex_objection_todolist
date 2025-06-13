@@ -1,8 +1,8 @@
-const argon2 = require("argon2");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
 	try {
 		const { username, password } = req.body;
 		const hashedPassword = await argon2.hash(password);
@@ -12,11 +12,16 @@ exports.register = async (req, res) => {
 		});
 		res.status(201).json({ message: "用戶註冊成功" });
 	} catch (error) {
+		if (error.code === "23505") {
+			return res.status(409).json({
+				message: "使用者名稱已存在，請選擇其他名稱",
+			});
+		}
 		res.status(500).json({ message: "註冊失敗", error: error.message });
 	}
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
 	try {
 		const { username, password } = req.body;
 		const user = await User.query().findOne({ username });

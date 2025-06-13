@@ -33,7 +33,7 @@ const validateTitle = (title) => {
 	return errors;
 };
 
-const validateTodoInput = (req, res, next) => {
+export const validateTodoInput = (req, res, next) => {
 	const { title } = req.body;
 
 	// 檢查 title 是否缺漏
@@ -54,7 +54,7 @@ const validateTodoInput = (req, res, next) => {
 };
 
 // 檢查請求參數 ID 是否有效
-const validateTodoId = (req, res, next) => {
+export const validateTodoId = (req, res, next) => {
 	const { id } = req.params;
 
 	// 檢查 ID 是否存在
@@ -71,7 +71,7 @@ const validateTodoId = (req, res, next) => {
 };
 
 // 驗證更新待辦事項的輸入
-const validateUpdateTodoInput = (req, res, next) => {
+export const validateUpdateTodoInput = (req, res, next) => {
 	const { title, completed } = req.body;
 
 	// 檢查是否至少有一個欄位要更新
@@ -99,10 +99,4 @@ const validateUpdateTodoInput = (req, res, next) => {
 	}
 
 	next();
-};
-
-module.exports = {
-	validateTodoInput,
-	validateTodoId,
-	validateUpdateTodoInput,
 };

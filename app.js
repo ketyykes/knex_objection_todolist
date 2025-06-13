@@ -1,11 +1,11 @@
-require("dotenv").config();
-const express = require("express");
-const { Model } = require("objection");
-const Knex = require("knex");
-const knexConfig = require("./knexfile");
+import "dotenv/config";
+import express from "express";
+import { Model } from "objection";
+import Knex from "knex";
+import knexConfig from "./knexfile.js";
 
-const authRoutes = require("./routes/authRoutes");
-const todoRoutes = require("./routes/todoRoutes");
+import authRoutes from "./routes/authRoutes.js";
+import todoRoutes from "./routes/todoRoutes.js";
 
 const app = express();
 const knex = Knex(knexConfig);

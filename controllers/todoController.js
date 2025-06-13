@@ -1,6 +1,6 @@
-const Todo = require("../models/Todo");
+import Todo from "../models/Todo.js";
 
-exports.createTodo = async (req, res) => {
+export const createTodo = async (req, res) => {
 	try {
 		const { title } = req.body;
 		const todo = await Todo.query().insert({ title, user_id: req.user.id });
@@ -18,7 +18,7 @@ exports.createTodo = async (req, res) => {
 	}
 };
 
-exports.getTodos = async (req, res) => {
+export const getTodos = async (req, res) => {
 	try {
 		const todos = await Todo.query().where("user_id", req.user.id);
 		res.json(todos);
@@ -28,7 +28,7 @@ exports.getTodos = async (req, res) => {
 };
 
 // 實現更新和刪除待辦事項的方法
-exports.updateTodo = async (req, res) => {
+export const updateTodo = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const { title, completed } = req.body;
@@ -77,7 +77,7 @@ exports.updateTodo = async (req, res) => {
 	}
 };
 
-exports.deleteTodo = async (req, res) => {
+export const deleteTodo = async (req, res) => {
 	try {
 		const { id } = req.params;
 

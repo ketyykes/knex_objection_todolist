@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const todoController = require("../controllers/todoController");
-const authMiddleware = require("../middleware/authMiddleware");
-const {
+import * as todoController from "../controllers/todoController.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+import {
 	validateTodoInput,
 	validateTodoId,
 	validateUpdateTodoInput,
-} = require("../middleware/validators");
+} from "../middleware/validators.js";
 
 router.use(authMiddleware);
 
@@ -20,4 +20,4 @@ router.put(
 );
 router.delete("/:id", validateTodoId, todoController.deleteTodo);
 
-module.exports = router;
+export default router;
