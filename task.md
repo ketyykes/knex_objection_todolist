@@ -96,10 +96,10 @@
 ### 階段 4: 變更功能實作 (第 5 天)
 
 #### ✅ Task 4.1: 實作待辦事項 CRUD Mutations
-- [ ] 實作 `createTodo` mutation resolver
-- [ ] 實作 `updateTodo` mutation resolver  
-- [ ] 實作 `deleteTodo` mutation resolver
-- [ ] 定義相關的 Input 型別
+- [x] 實作 `createTodo` mutation resolver
+- [x] 實作 `updateTodo` mutation resolver  
+- [x] 實作 `deleteTodo` mutation resolver
+- [x] 定義相關的 Input 型別
 
 **完成標準**: 可以透過 GraphQL 執行所有待辦事項的 CRUD 操作
 
