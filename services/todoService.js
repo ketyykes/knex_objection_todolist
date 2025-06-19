@@ -16,8 +16,12 @@ class TodoService {
 			const todo = await Todo.query().insert({
 				title,
 				user_id: userId,
+				completed: false,
 			});
-			return todo;
+
+			// 重新查詢以獲取完整的時間戳資訊
+			const createdTodo = await Todo.query().findById(todo.id);
+			return createdTodo;
 		} catch (error) {
 			if (error.code === "23505") {
 				throw new Error("相同標題的待辦事項已存在");
