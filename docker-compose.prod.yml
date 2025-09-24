@@ -47,10 +47,16 @@ services:
       - backend # 連接到後端網路
   cloudflared:
     image: cloudflare/cloudflared:latest
-    command: >
-      tunnel --no-autoupdate run
-      --token ${CLOUDFLARE_TUNNEL_TOKEN}
-      --metrics 0.0.0.0:2000
+    command:
+      [
+        "tunnel",
+        "run",
+        "--no-autoupdate",
+        "--token",
+        "${CLOUDFLARE_TUNNEL_TOKEN}",
+        "--metrics",
+        "0.0.0.0:2000",
+      ]
     restart: unless-stopped
     depends_on:
       app:
