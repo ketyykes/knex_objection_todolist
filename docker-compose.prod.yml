@@ -45,6 +45,23 @@ services:
     restart: unless-stopped # 除非手動停止，否則容器總是重新啟動
     networks:
       - backend # 連接到後端網路
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: >
+      tunnel --no-autoupdate run
+      --token ${CLOUDFLARE_TUNNEL_TOKEN}
+      --metrics 0.0.0.0:2000
+    restart: unless-stopped
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [backend]
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:2000/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
 # 定義持久化資料卷
 volumes:
