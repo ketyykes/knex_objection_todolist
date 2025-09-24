@@ -1,0 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 專案結構指南
+
+這是一個使用 Knex.js 和 Objection.js 建立的 Todo List API 專案。
+
+## 主要檔案和目錄
+- [app.js](mdc:app.js) - 應用程式的主要入口點
+- [knexfile.js](mdc:knexfile.js) - 資料庫設定檔
+- [package.json](mdc:package.json) - 專案相依套件管理
+
+## 核心目錄
+- `models/` - Objection.js 模型定義
+- `controllers/` - API 控制器
+- `routes/` - API 路由定義
+- `middleware/` - 中間件
+- `db/` - 資料庫遷移和種子檔案
+- `services/` - 業務邏輯服務
+- `graphql/` - GraphQL 相關檔案
+
+## 文件
+- [README.md](mdc:README.md) - 專案說明文件
+- [PRD.md](mdc:PRD.md) - 產品需求文件
+
+## Docker 相關
+- [Dockerfile](mdc:Dockerfile) - 開發環境 Docker 設定
+- [Dockerfile.prod](mdc:Dockerfile.prod) - 生產環境 Docker 設定
+- [docker-compose.yml](mdc:docker-compose.yml) - 開發環境服務編排
+- [docker-compose.prod.yml](mdc:docker-compose.prod.yml) - 生產環境服務編排

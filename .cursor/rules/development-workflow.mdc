@@ -1,0 +1,36 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# 開發流程指南
+
+## 環境設定
+1. 安裝相依套件：`pnpm install`
+2. 設定環境變數
+3. 啟動開發環境：`docker-compose up`
+
+## 資料庫操作
+- 建立遷移：`knex migrate:make migration_name`
+- 執行遷移：`knex migrate:latest`
+- 回復遷移：`knex migrate:rollback`
+- 建立種子檔：`knex seed:make seed_name`
+- 執行種子檔：`knex seed:run`
+
+## 開發流程
+1. 從主分支建立新的功能分支
+2. 開發完成後提交程式碼
+3. 執行測試確保功能正常
+4. 提交合併請求（Pull Request）
+
+## 部署流程
+1. 確保所有測試通過
+2. 更新版本號
+3. 建立生產環境映像檔
+4. 部署至目標環境
+
+## 程式碼審查重點
+- 符合程式碼風格規範
+- 適當的錯誤處理
+- 程式碼效能考量
+- 資安風險評估

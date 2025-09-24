@@ -1,0 +1,29 @@
+---
+alwaysApply: false
+---
+# 程式碼風格指南
+
+## 命名規範
+- 檔案名稱：使用 kebab-case（例如：`user-service.js`）
+- 類別名稱：使用 PascalCase（例如：`class UserController`）
+- 函式和變數：使用 camelCase（例如：`getUserById`）
+- 常數：使用大寫 SNAKE_CASE（例如：`MAX_RETRY_COUNT`）
+
+## 程式碼組織
+- 每個檔案應該只有一個主要的類別或模組
+- 相關的功能應該放在同一個目錄下
+- 使用明確的檔案命名來表示檔案的用途
+
+## API 設計
+- RESTful API 端點使用複數名詞（例如：`/api/users`）
+- GraphQL 查詢和變異應遵循 GraphQL 命名慣例
+
+## 資料庫
+- 資料表名稱使用複數形式（例如：`users`）
+- 資料表欄位使用 snake_case
+- 外鍵命名格式：`{referenced_table_singular}_id`
+
+## 註解規範
+- 使用 JSDoc 格式撰寫函式註解
+- 複雜的業務邏輯需要加上說明註解
+- 避免無意義的註解
